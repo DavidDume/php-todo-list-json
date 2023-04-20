@@ -14,6 +14,8 @@
             <ul class="list-group">
                 <li v-for="todo in todosList" class="list-group-item">{{todo}}</li>
             </ul>
+            <input type="text" placeholder="Inserisci todo" v-model="item">
+            <button class="btn btn-primary" @click="addTodo">Inserisci</button>
         </div>
     </div>
 

@@ -4,6 +4,7 @@ createApp({
   data() {
     return {
       todosList: [],
+      item: '',
     };
   },
   methods: {
@@ -11,6 +12,19 @@ createApp({
       axios.get('server.php').then((res) => {
         this.todosList = res.data;
       });
+    },
+    addTodo() {
+      const data = {
+        todo: this.item,
+      };
+      axios
+        .post('server.php', data, {
+          headers: { 'Content-Type': 'multipart/form-data' },
+        })
+        .then((res) => {
+          this.todosList = res.data;
+          this.item = '';
+        });
     },
   },
   mounted() {
