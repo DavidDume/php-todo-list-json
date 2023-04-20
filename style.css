@@ -1,0 +1,7 @@
+.crossed {
+    text-decoration: line-through;
+}
+
+.list-group-item:hover {
+    cursor: pointer;
+}

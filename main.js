@@ -4,7 +4,10 @@ createApp({
   data() {
     return {
       todosList: [],
-      item: '',
+      item: {
+        status: 'not_done',
+        text: '',
+      },
     };
   },
   methods: {
@@ -15,16 +18,23 @@ createApp({
     },
     addTodo() {
       const data = {
-        todo: this.item,
+        todo: {
+          text: this.item.text,
+          status: this.item.status,
+        },
       };
       axios
         .post('server.php', data, {
           headers: { 'Content-Type': 'multipart/form-data' },
         })
         .then((res) => {
+          console.log(res.data);
           this.todosList = res.data;
-          this.item = '';
+          this.item = {};
         });
+    },
+    completeTodo(index) {
+      this.todosList[index].status = 'done';
     },
   },
   mounted() {

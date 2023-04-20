@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
     <title>To do list</title>
 </head>
 <body>
@@ -12,9 +13,11 @@
     <div id="app">
         <div class="container">
             <ul class="list-group">
-                <li v-for="todo in todosList" class="list-group-item">{{todo}}</li>
+                <li v-for="(todo, index) in todosList" @click="completeTodo(index)" class="list-group-item" :class="todo.status=='done'?'crossed':''">
+                    {{todo.text}}
+                </li>
             </ul>
-            <input type="text" placeholder="Inserisci todo" v-model="item">
+            <input type="text" placeholder="Inserisci todo" v-model="item.text">
             <button class="btn btn-primary" @click="addTodo">Inserisci</button>
         </div>
     </div>
