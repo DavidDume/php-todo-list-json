@@ -18,20 +18,20 @@ createApp({
     },
     addTodo() {
       const data = {
-        todo: {
-          text: this.item.text,
-          status: this.item.status,
-        },
+        text: this.item.text,
       };
       axios
         .post('server.php', data, {
           headers: { 'Content-Type': 'multipart/form-data' },
         })
         .then((res) => {
-          console.log(res.data);
           this.todosList = res.data;
-          this.item = {};
+          this.item = {
+            status: 'not_done',
+            text: '',
+          };
         });
+      console.log(this.item);
     },
     completeTodo(index) {
       this.todosList[index].status = 'done';
