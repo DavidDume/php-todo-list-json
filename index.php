@@ -13,7 +13,7 @@
     <div id="app">
         <div class="container">
             <ul class="list-group">
-                <li v-for="(todo, index) in todosList" @click="completeTodo(index)" class="list-group-item" :class="{crossed: !todo.status}">
+                <li v-for="(todo, index) in todosList" @click="completeTodo(index)" class="list-group-item" :class="{crossed: todo.status}">
                     {{todo.text}}
                 </li>
             </ul>

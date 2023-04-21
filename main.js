@@ -5,7 +5,7 @@ createApp({
     return {
       todosList: [],
       item: {
-        status: 'not_done',
+        status: 'false',
         text: '',
       },
     };
@@ -18,23 +18,43 @@ createApp({
     },
     addTodo() {
       const data = {
-        text: this.item.text,
+        todo: {
+          text: this.item.text,
+          status: this.item.status,
+        },
       };
       axios
         .post('server.php', data, {
           headers: { 'Content-Type': 'multipart/form-data' },
         })
         .then((res) => {
+          console.log(res.data);
           this.todosList = res.data;
           this.item = {
-            status: 'not_done',
+            status: false,
             text: '',
           };
         });
-      console.log(this.item);
     },
     completeTodo(index) {
-      this.todosList[index].status = 'done';
+      const data = {
+        changeTodo: {
+          index: index,
+          status: !this.todosList[index].status,
+        },
+      };
+      axios
+        .post('server.php', data, {
+          headers: { 'Content-Type': 'multipart/form-data' },
+        })
+        .then((res) => {
+          console.log(res.data);
+          this.todosList = res.data;
+          this.item = {
+            status: !this.todosList[index].status,
+            text: '',
+          };
+        });
     },
   },
   mounted() {
