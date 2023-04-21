@@ -18,6 +18,12 @@
 
     }
 
+    if(isset($_POST['deleteTodo'])) {
+        $index = $_POST['deleteTodo']['index'];
+        unset($list[$index]);
+        file_put_contents('database.json', json_encode($list));
+
+    }
 
     header('Content-Type: application/json');
     echo json_encode($list);

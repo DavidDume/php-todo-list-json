@@ -56,6 +56,25 @@ createApp({
           };
         });
     },
+    deleteTodo(index) {
+      const data = {
+        deleteTodo: {
+          index: index,
+        },
+      };
+      axios
+        .post('server.php', data, {
+          headers: { 'Content-Type': 'multipart/form-data' },
+        })
+        .then((res) => {
+          console.log(res.data);
+          this.todosList = res.data;
+          this.item = {
+            status: false,
+            text: '',
+          };
+        });
+    },
   },
   mounted() {
     this.viewTodos();
